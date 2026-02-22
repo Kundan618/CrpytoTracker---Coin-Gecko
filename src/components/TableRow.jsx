@@ -24,11 +24,12 @@ const TableRow = ({ data, isLoading }) => {
                             className="w-full bg-transparent text-white flex py-4 px-2 font-semibold items-center justify-between cursor-pointer"
                         >
                             <div className="flex items-center justify-start gap-3 basis-[35%]">
-                                <div className="w-[5rem] h-[5rem]">
+                                <div className="w-[4rem] h-[4rem]">
                                     <img
                                         src={coin.image}
                                         alt={coin.name}
                                         className="w-full h-full "
+                                        loading='lazy'
                                     />
                                 </div>
 

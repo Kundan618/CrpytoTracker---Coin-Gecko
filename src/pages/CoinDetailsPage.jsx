@@ -5,6 +5,8 @@ import { fetchCoinDetails } from '../services/FetchCoinsDetails';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { CurrencyContext } from '../context/CurrencyContext';
+import { Code } from 'react-content-loader';
+
 const CoinDetailsPage = () => {
   const { coinId } = useParams();
   const { currency } = useContext(CurrencyContext);
@@ -20,9 +22,7 @@ const CoinDetailsPage = () => {
   }, [coin]);
   if (isLoading) {
     return (
-      <div className="text-white text-2xl flex justify-center items-center h-64">
-        Loading...
-      </div>
+      <Code />
     )
   }
   if (isError) {
@@ -35,7 +35,7 @@ const CoinDetailsPage = () => {
 
   return (
     <div className='flex flex-col md:flex-row '>
-      <div className="md:w-2/5 w-full flex flex-col items-center mt-6 md:mt-0 border-r-2 border-gray-500">
+      <div className="md:w-2/5 w-full flex flex-col items-center mt-6 md:mt-0 border-r-2 border-gray-500 p-2">
         <img
           src={coin?.image?.large}
           alt={coin?.name}
@@ -43,7 +43,7 @@ const CoinDetailsPage = () => {
         <h1 className='text-4xl font-bold mb-5'>
           {coin?.name}
         </h1>
-        <p className='text-justify ml-2 mr-2'>
+        <p className='text-justify '>
           {coin?.description?.en ? coin.description.en : "No description available."}
         </p>
         <div className='w-full flex flex-col mt-5 md:flex-row md:justify-around'>

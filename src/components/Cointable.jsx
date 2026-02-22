@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import { fetchCoinData } from "../services/fetchCoinData";
+import { fetchCoinData } from "../services/FetchCoinData";
 import { useQuery } from "@tanstack/react-query";
 import Pagination from "./Pagination";
 import TableRow from "./TableRow";
 import TablehHeader from "./TablehHeader";
 import { CurrencyContext } from "../context/CurrencyContext";
+import { BulletList } from "react-content-loader";
 
 const Cointable = () => {
   // useEffect(() => {
@@ -21,9 +22,7 @@ const Cointable = () => {
   });
   if (isLoading) {
     return (
-      <div className="text-white text-2xl flex justify-center items-center h-64">
-        Loading...
-      </div>
+       <BulletList />
     );
   }
   if (isError) {
@@ -33,7 +32,7 @@ const Cointable = () => {
       </div>
     );
   }
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <TablehHeader data={data} currency={currency} />

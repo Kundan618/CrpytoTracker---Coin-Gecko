@@ -1,12 +1,22 @@
 import React, { useContext } from "react";
 import { CurrencyContext } from "../context/CurrencyContext"; // Adjust the path based on your project structure
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { FetchSearchCoin } from "../services/FetchSearchCoin";
+import { useState } from "react";
 const Navbar = () => {
   const { setCurrency } = useContext(CurrencyContext);
   const navigate = useNavigate();
   const goToHome = () => {
     navigate("/");
   };
+  const [query, setQuery] = useState("");
+  const {data, isLoading} = useQuery({
+    queryKey: ["search", query],
+    queryFn: () => FetchSearchCoin(query),
+    enabled: !!query, // Only run the query if there is a search query
+  })
+  
   return (
     <>
       <div className="navbar bg-base-100 shadow-sm sticky top-0 z-10">
@@ -50,7 +60,8 @@ const Navbar = () => {
           <a className="btn btn-ghost text-xl">CoinGecko</a>
         </div>
         <div className="navbar-end">
-          <button className="btn btn-ghost btn-circle">
+          <input type="text" />
+          <button className="btn btn-ghost btn-circle" onChange={(e)=> {setQuery(e.target.value)}}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
