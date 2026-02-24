@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
+import { SearchProvider } from "./context/SearchContext.jsx";
  
 const queryClient = new QueryClient();
 // console.log(queryClient);
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
+     <SearchProvider>
       <QueryClientProvider client={queryClient}>
         <App />
       </QueryClientProvider>
+      </SearchProvider>
     </BrowserRouter>
   </StrictMode>,
 );

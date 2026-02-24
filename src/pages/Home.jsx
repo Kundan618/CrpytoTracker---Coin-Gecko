@@ -1,12 +1,13 @@
 import React from 'react'
-import Cointable from '../components/cointable'
 import Banner from '../components/banner';
+import CoinTableContainer from '../components/CoinTable/CoinTableContainer';
 
 const Home = () => {
   return (
     <>
       <Banner />
-      <Cointable /></>
+      <CoinTableContainer />
+    </>
   )
 }
 

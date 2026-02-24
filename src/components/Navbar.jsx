@@ -1,21 +1,20 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { CurrencyContext } from "../context/CurrencyContext"; // Adjust the path based on your project structure
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { FetchSearchCoin } from "../services/FetchSearchCoin";
 import { useState } from "react";
+
+import SearchBar from "./SearchBar/searchBar";
+import { SearchContext } from "../context/SearchContext";
 const Navbar = () => {
+
   const { setCurrency } = useContext(CurrencyContext);
   const navigate = useNavigate();
   const goToHome = () => {
     navigate("/");
   };
-  const [query, setQuery] = useState("");
-  const {data, isLoading} = useQuery({
-    queryKey: ["search", query],
-    queryFn: () => FetchSearchCoin(query),
-    enabled: !!query, // Only run the query if there is a search query
-  })
+  const {openSearch, setOpenSearch} = useContext(SearchContext);
   
   return (
     <>
@@ -60,25 +59,36 @@ const Navbar = () => {
           <a className="btn btn-ghost text-xl">CoinGecko</a>
         </div>
         <div className="navbar-end">
-          <input type="text" />
-          <button className="btn btn-ghost btn-circle" onChange={(e)=> {setQuery(e.target.value)}}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />{" "}
-            </svg>
-          </button>
-          <button className="btn btn-ghost btn-circle">
+
+          <div className="navbar-end">
+
+            {openSearch ? <SearchBar /> : (
+
+              <button
+                className="btn btn-ghost btn-circle"
+                onClick={() => setOpenSearch(true)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+
+            )}
+
+          </div>
+
+          {/* <button className="btn btn-ghost btn-circle">
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,9 +107,9 @@ const Navbar = () => {
               </svg>
               <span className="badge badge-xs badge-primary indicator-item"></span>
             </div>
-          </button>
+          </button> */}
         </div>
-      </div>
+      </div >
     </>
   );
 };

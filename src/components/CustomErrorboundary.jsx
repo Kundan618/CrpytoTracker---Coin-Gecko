@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CustomErrorboundary = ({error,  resetErrorBoundary}) => {
+const CustomErrorboundaryUI = ({error,  resetErrorBoundary}) => {
   return (
     <div role='alert' className='alert alert-error'>
       <p>Something went wrong:</p>
@@ -10,4 +10,4 @@ const CustomErrorboundary = ({error,  resetErrorBoundary}) => {
   )
 }
 
-export default CustomErrorboundary
+export default CustomErrorboundaryUI
